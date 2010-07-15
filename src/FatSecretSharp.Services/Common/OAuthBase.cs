@@ -97,7 +97,11 @@ namespace FatSecretSharp.Services.Common
             {
                 foreach (string str in parameters.Split(new char[] { '&' }))
                 {
-                    if ((!IsNullOrEmpty(str) && !str.StartsWith("oauth_")) && (!str.StartsWith("xoauth_") && !str.StartsWith("opensocial_")))
+                    // Doesnt start with oauth_ (except for oauth_token, which is required for profile.get.
+                    if (!IsNullOrEmpty(str) 
+                        && !str.StartsWith("oauth_")
+                        && !str.StartsWith("xoauth_") 
+                        && !str.StartsWith("opensocial_"))
                     {
                         if (str.IndexOf('=') > -1)
                         {

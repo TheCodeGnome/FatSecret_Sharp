@@ -25,10 +25,8 @@ namespace FatSecretSharp.Services
         {
             // TODO: check for empty search expression?
 
-            var parms = new Dictionary<string, string>()
-            {
-                { "method", this.Method },
-                { "format", this.Format },
+            var parms = new Dictionary<string, string>(GenerateMethodAndFormatParmsDictionary())
+            {                
                 { "search_expression", request.SearchExpression },
                 { "page_number", request.PageNumber.ToString() },
                 { "max_results", request.MaxResults.ToString() }

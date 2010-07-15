@@ -18,12 +18,8 @@ namespace FatSecretSharp.Services
 
         protected override string CreateRequestUrl(ExerciseCatalogRequest request)
         {
-            var parms = new Dictionary<string, string>()
-            {
-                { "method", this.Method },
-                { "format", this.Format },
-            };
-
+            var parms = new Dictionary<string, string>(GenerateMethodAndFormatParmsDictionary());
+            
             return builder.CreateRestAPIGETUrl(parms);
         }
     }

@@ -8,19 +8,19 @@ using FatSecretSharp.Services.Responses;
 
 namespace FatSecretSharp.Services
 {
-    public class FoodDetails : BaseFatSecretGetService<FoodDetailsRequest, FoodDetailsResponse>
+    public class ProfileGetAuthInfo : BaseFatSecretGetService<ProfileGetAuthRequest, ProfileGetAuthResponse>
     {
-        public FoodDetails(string key, string secret)
-            : base(key, secret, FatSecretAPIMethods.Food_Get)
+        public ProfileGetAuthInfo(string key, string secret)
+            : base(key, secret, FatSecretAPIMethods.Profile_Get_Auth)
         {
 
         }
 
-        protected override string CreateRequestUrl(FoodDetailsRequest request)
+        protected override string CreateRequestUrl(ProfileGetAuthRequest request)
         {
             var parms = new Dictionary<string, string>(GenerateMethodAndFormatParmsDictionary())
-            {                
-                { "food_id", request.FoodId.ToString() },
+            {
+                {"user_id", request.UserId}
             };
 
             return builder.CreateRestAPIGETUrl(parms);
