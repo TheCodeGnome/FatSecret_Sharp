@@ -13,7 +13,7 @@ namespace FatSecretSharp.Services.Responses
         public string weight_comment { get; set; }
         public double weight_kg { get; set; }
 
-        public DateTime Date
+        public DateTime DateUTC
         {
             get
             {

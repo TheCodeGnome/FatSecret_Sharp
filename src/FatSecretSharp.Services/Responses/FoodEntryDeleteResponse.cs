@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 
 namespace FatSecretSharp.Services.Responses
-{   
-    public class WeightUpdateResponse : BaseSuccessResponse
-    {        
+{
+    public class FoodEntryDeleteResponse : BaseSuccessResponse
+    {
     }
 }

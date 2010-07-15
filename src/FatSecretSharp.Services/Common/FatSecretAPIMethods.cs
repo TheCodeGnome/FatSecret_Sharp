@@ -48,5 +48,40 @@ namespace FatSecretSharp.Services.Common
         /// weights.get_month
         /// </summary>
         public static string Weight_GetMonth = "weights.get_month";
+
+        /// <summary>
+        /// food_entry.create
+        /// </summary>
+        public static string FoodEntry_Create = "food_entry.create";
+
+        /// <summary>
+        /// food_entry.delete
+        /// </summary>
+        public static string FoodEntry_Delete = "food_entry.delete";
+
+        /// <summary>
+        /// food_entry.edit
+        /// </summary>
+        public static string FoodEntry_Edit = "food_entry.edit";
+
+        /// <summary>
+        /// food_entry.copy
+        /// </summary>
+        public static string FoodEntry_Copy = "food_entries.copy";
+
+        /// <summary>
+        /// food_entry.copy_saved_meal
+        /// </summary>
+        public static string FoodEntry_CopySavedMeal = "food_entries.copy_saved_meal";
+
+        /// <summary>
+        /// food_entries.get
+        /// </summary>
+        public static string FoodEntry_Get = "food_entries.get";
+        
+        /// <summary>
+        /// food_entries.get_month
+        /// </summary>
+        public static string FoodEntry_GetMonth = "food_entries.get_month";
     }
 }
