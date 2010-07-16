@@ -7,26 +7,6 @@ using System.Net;
 namespace FatSecretSharp.Services.Common
 {
     /// <summary>
-    /// A centralized static list of FatSecret methods.
-    /// </summary>
-    public static class FatSecretAPIMethods
-    {
-        /// <summary>
-        /// foods.search
-        /// </summary>
-        public static string Food_Search = "foods.search";
-        /// <summary>
-        /// food.get
-        /// </summary>
-        public static string Food_Get = "food.get";
-
-        /// <summary>
-        /// exercises.get
-        /// </summary>
-        public static string Exercise_Catalog = "exercises.get";
-    }
-
-    /// <summary>
     /// Strongly typed way of dealing with Http Methods.
     /// </summary>
     public enum HttpMethod
@@ -61,11 +41,13 @@ namespace FatSecretSharp.Services.Common
         /// <summary>
         /// Creates the rest AP GET URL.
         /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="secret">The secret.</param>
         /// <param name="optionalParameters">The optional parameters.</param>
-        /// <returns>A fully fleshed FatSecret rest url ready to call.</returns>
-        public string CreateRestAPIGETUrl(Dictionary<string, string> optionalParameters)
+        /// <param name="userToken">The user token for the user you are making this request on behalf of.</param>
+        /// <param name="userSecret">The user secret for the user you are making this request on behalf of.</param>
+        /// <returns>
+        /// A fully fleshed FatSecret rest url ready to call.
+        /// </returns>
+        public string CreateRestAPIGETUrl(Dictionary<string, string> optionalParameters, string userToken = null, string userSecret = null)
         {
             var parmString = string.Empty;
             if (optionalParameters != null && optionalParameters.Count > 0)
@@ -82,7 +64,7 @@ namespace FatSecretSharp.Services.Common
             string outParms;
             var baseUri = new Uri(string.Concat(apiUrl, parmString));
 
-            var sig = oAuth.GenerateSignature(baseUri, consumerKey, consumerSecret, "GET", null, null, out outUrl, out outParms);
+            var sig = oAuth.GenerateSignature(baseUri, consumerKey, consumerSecret, "GET", userToken, userSecret, out outUrl, out outParms);
 
             var fullUrl = String.Format("{0}?{1}&oauth_signature={2}", outUrl, outParms, HttpUtility.UrlEncode(sig));
 

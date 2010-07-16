@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using Service4u2.Common;
+using FatSecretSharp.Services.Common.Service4u2Lib.Json;
 
 namespace Service4u2.Json
 {
@@ -40,6 +41,7 @@ namespace Service4u2.Json
     /// </summary>
     /// <typeparam name="TResultType">The type of the result.</typeparam>
     public abstract class BaseJsonService<TResultType> : IAsyncService<TResultType>
+        where TResultType : new()
     {
         protected WebClient client;
 
@@ -119,7 +121,21 @@ namespace Service4u2.Json
                 return;
             }
 
-            var result = JsonHelper.Deserialize<TResultType>(downloadedString);
+            var result = new TResultType();
+
+            string json = downloadedString;
+
+            if (result is IJSONMassager)
+            {                
+                json = ((IJSONMassager)result).MassageJSON(downloadedString);
+            }
+
+            if (result is IJSONSelfSerialize<TResultType>)
+            {
+                result = ((IJSONSelfSerialize<TResultType>)result).SelfSerialize(json);
+            }
+            else
+                result = JsonHelper.Deserialize<TResultType>(json);
 
             if (GotResult != null)
                 GotResult(this, new EventArgs<TResultType>() { Argument = result });

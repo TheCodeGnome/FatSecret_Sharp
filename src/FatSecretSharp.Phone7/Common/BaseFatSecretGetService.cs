@@ -9,12 +9,22 @@ using System.Threading;
 namespace FatSecretSharp.Services.Common
 {
     public abstract class BaseFatSecretGetService<TRequest, TResponse> : BaseJsonService<TResponse>
+        where TResponse : new()
     {
         protected FatSecretUrlBuilder builder;
         protected string ConsumerKey = string.Empty;
         protected string ConsumerSecret = string.Empty;
         protected string Method = string.Empty;
         protected string Format = "json";
+
+        protected Dictionary<string, string> GenerateMethodAndFormatParmsDictionary()
+        {
+            return new Dictionary<string, string>
+                {
+                    { "method", this.Method },
+                    { "format", this.Format },
+                };
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseFatSecretGetService&lt;TRequest, TResponse&gt;"/> class.

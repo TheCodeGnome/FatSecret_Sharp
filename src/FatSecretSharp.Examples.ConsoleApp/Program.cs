@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 using FatSecretSharp.Services;
 using FatSecretSharp.Services.Requests;
 
@@ -44,15 +43,10 @@ namespace FatSecretSharp.Examples.ConsoleApp
         static void Main(string[] args)
         {
             if (String.IsNullOrEmpty(consumerKey))
-            {
-                Console.WriteLine("Enter your API Key:");
-                consumerKey = Console.ReadLine();
-            }
+                consumerKey = AskFor<string>("Enter your API Key:");
+
             if (String.IsNullOrEmpty(consumerSecret))
-            {
-                Console.WriteLine("Enter your API Secret:");
-                consumerSecret = Console.ReadLine();
-            }
+                consumerSecret = AskFor<string>("Enter your API Secret:");            
 
             Console.WriteLine(string.Empty);
 
@@ -123,10 +117,10 @@ namespace FatSecretSharp.Examples.ConsoleApp
             if (entryEdit == null)
                 entryEdit = new FoodEntryEdit(consumerKey, consumerSecret);
 
-            var entryId = AskFor<int>("Entry Id: ");
+            var entryId = AskFor<long>("Entry Id: ");
             var newName = AskFor<string>("New Name: ");
             var newMeal = (MealType)Enum.Parse(typeof(MealType), AskFor<int>("New Meal (0 = breakfast, 1 = lunch, 2 = dinner, 3 = other): ").ToString());
-            var newServId = AskFor<int>("Serving Id: ");
+            var newServId = AskFor<long>("Serving Id: ");
             var newNumServings = AskFor<double>("Number of servings: ");            
 
             var response = entryEdit.GetResponseSynchronously(new FoodEntryEditRequest()
@@ -174,7 +168,7 @@ namespace FatSecretSharp.Examples.ConsoleApp
             if (entryDelete == null)
                 entryDelete = new FoodEntryDelete(consumerKey, consumerSecret);
 
-            var entryId = AskFor<int>("Food Entry Id to delete: ");
+            var entryId = AskFor<long>("Food Entry Id to delete: ");
 
             var response = entryDelete.GetResponseSynchronously(new FoodEntryDeleteRequest()
             {
@@ -257,9 +251,9 @@ namespace FatSecretSharp.Examples.ConsoleApp
             if (entryCreate == null)
                 entryCreate = new FoodEntryCreate(consumerKey, consumerSecret);
 
-            var foodId = AskFor<int>("Food Id: ");
-            var servId = AskFor<int>("Serving Id: ");
-            var numServ = AskFor<int>("Number of servings: ");
+            var foodId = AskFor<long>("Food Id: ");
+            var servId = AskFor<long>("Serving Id: ");
+            var numServ = AskFor<double>("Number of servings: ");
             var mealChoice = AskFor<int>("Meal type (0 = breakfast, 1 = lunch, 2 = dinner, 3 = other): ");
             var meal = (MealType)Enum.Parse(typeof(MealType), mealChoice.ToString());
             var name = AskFor<string>("Entry name: ");
